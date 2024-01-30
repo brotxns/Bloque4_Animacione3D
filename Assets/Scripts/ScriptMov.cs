@@ -29,6 +29,9 @@ public class ScriptMov : MonoBehaviour
 
     private void Update()
     {
-        rb.velocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
+        //rb.velocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
+        Vector3 newVelocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
+        newVelocity = transform.rotation * newVelocity;
+        rb.velocity = newVelocity;
     }
 }
