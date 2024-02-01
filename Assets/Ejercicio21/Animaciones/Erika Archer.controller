@@ -38,7 +38,13 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: estaCorriendo
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: estaBailando
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6431662253156960246}
   m_Solo: 0
@@ -193,7 +199,13 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: estaSaltando
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: estaBailando
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3071654923468801266}
   m_Solo: 0
@@ -246,12 +258,6 @@ AnimatorController:
   m_Name: Erika Archer
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: estaParado
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: estaCorriendo
     m_Type: 4
     m_DefaultFloat: 0
@@ -315,7 +321,13 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: estaSaltando
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: estaBailando
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6431662253156960246}
   m_Solo: 0
@@ -337,7 +349,13 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: estaSaltando
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: estaCorriendo
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3071654923468801266}
   m_Solo: 0
@@ -359,7 +377,13 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: estaBailando
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: estaCorriendo
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8501671760991841220}
   m_Solo: 0
@@ -381,7 +405,13 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: estaSaltando
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: estaCorriendo
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8501671760991841220}
   m_Solo: 0
