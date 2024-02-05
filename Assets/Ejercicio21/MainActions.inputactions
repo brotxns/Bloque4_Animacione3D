@@ -6,15 +6,6 @@
             "id": "6b24870f-fe91-497f-880b-512ec51171e4",
             "actions": [
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "78e6f834-7bbd-4baa-9f68-931d5efeb9c8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Move",
                     "type": "Value",
                     "id": "6fd90b39-f59b-401f-8673-3eba0ce2dc53",
@@ -22,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "78e6f834-7bbd-4baa-9f68-931d5efeb9c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Dance",
@@ -36,7 +36,29 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "7d367bc9-7971-4125-b13b-bfdf7294a3d3",
+                    "id": "de63b82c-9145-419a-9b51-3c8ab3d00fa0",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "016737da-c891-4e6d-ab95-58455e8d024b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dance",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e3eb9b9-e901-4c26-8daa-83c68282dd0d",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
@@ -110,28 +132,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "de63b82c-9145-419a-9b51-3c8ab3d00fa0",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "016737da-c891-4e6d-ab95-58455e8d024b",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dance",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

@@ -5,20 +5,12 @@ using UnityEngine.InputSystem;
 
 public class ScriptMov : MonoBehaviour
 {
+    public float speedMovement = 5f;
     private Rigidbody rb;
     private Vector2 moveInput;
-    public float movementSpeed;
-
-    
     private Animator animator;
-    //private bool canMove = true;  //este canMove creo que equivale a void OnMove
-
     public float jumpForce = 5f;
-    private bool tocaSuelo = false; //isGrounded
-    //isWalking = estaCorriendo
-    //isJumping = estaSaltando
 
-    // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,29 +20,44 @@ public class ScriptMov : MonoBehaviour
     private void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        UpdateAnimation();
     }
 
-    // Update is called once per frame
-    void OnJump()
+    private void OnJump()
     {
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-        tocaSuelo = false;
-        // Configurar el parámetro isJumping en el Animator
-        animator.SetBool("estaSaltando", true);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        // Lógica de salto aquí
+        animator.SetTrigger("Jump");
+        UpdateAnimation();
     }
 
-    void OnDance()
+    private void OnDance()
     {
-        //if con ("no esta conrriendo", "no esta saltando", "esta tocando suelo") 
-        animator.SetBool("estaBailando", true);
+        // Lógica de baile aquí
+        animator.SetTrigger("Dance");
+        UpdateAnimation();
     }
-    
 
-    //private void Update()
-    //{
-    //    //rb.velocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
-    //    Vector3 newVelocity = new Vector3(moveInput.x * movementSpeed, rb.velocity.y, moveInput.y * movementSpeed);
-    //    newVelocity = transform.rotation * newVelocity;
-    //    rb.velocity = newVelocity;
-    //}
+    void UpdateAnimation()
+    {
+        bool isRunning = Mathf.Abs(moveInput.x) > 0.1f;
+        bool isJumping = false; // Agrega la lógica para determinar si el personaje está saltando
+        bool isDancing = false; // Agrega la lógica para determinar si el personaje está bailando
+
+        animator.SetBool("Run", isRunning);
+        animator.SetBool("Jump", isJumping);
+        animator.SetBool("Dance", isDancing);
+
+        if (!isRunning && !isJumping && !isDancing)
+        {
+            animator.SetTrigger("Idle");
+        }
+    }
+
+    void Update()
+    {
+        Vector3 newVelocity = new Vector3(moveInput.x * speedMovement, rb.velocity.y, moveInput.y * speedMovement);
+        newVelocity = transform.rotation * newVelocity;
+        rb.velocity = newVelocity;
+    }
 }
