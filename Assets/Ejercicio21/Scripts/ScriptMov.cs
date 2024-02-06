@@ -10,6 +10,8 @@ public class ScriptMov : MonoBehaviour
     private Vector2 moveInput;
     private Animator animator;
     public float jumpForce = 5f;
+    private bool isGrounded = false;
+    public Transform modelTrans;
 
     void Awake()
     {
@@ -27,17 +29,15 @@ public class ScriptMov : MonoBehaviour
 
     private void OnJump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-        animator.SetBool("estaSaltando", true);
-        //// Lógica de salto aquí
-        //animator.SetTrigger("Jump");
-        //UpdateAnimation();
+        if (isGrounded == true)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 
     private void OnDance()
     {
-        animator.SetBool("estaBailando", true); 
+        //animator.SetBool("estaBailando", true); 
     }
 
     //void UpdateAnimation()
@@ -61,5 +61,33 @@ public class ScriptMov : MonoBehaviour
         Vector3 newVelocity = new Vector3(moveInput.x * speedMovement, rb.velocity.y, moveInput.y * speedMovement);
         newVelocity = transform.rotation * newVelocity;
         rb.velocity = newVelocity;
+
+        if (moveInput.x != 0)
+        {
+            animator.SetBool("estaCorriendo", true);
+            animator.SetBool("estaBailando", false);
+        }
+        else
+        {
+            animator.SetBool("estaCorriendo", false);
+        }
+
+        if (moveInput.x > 0)
+        {
+            modelTrans.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (moveInput.x < 0)
+        {
+            modelTrans.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        if (isGrounded == false)
+        {
+            animator.SetBool("estaSaltando", true);
+        }
+        else
+        {
+            //animator.SetBool("estaSaltando," false);
+        }
     }
 }
