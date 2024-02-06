@@ -20,39 +20,41 @@ public class ScriptMov : MonoBehaviour
     private void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
-        UpdateAnimation();
+
+        animator.SetBool("estaCorriendo", true);
+        //UpdateAnimation();
     }
 
     private void OnJump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        // Lógica de salto aquí
-        animator.SetTrigger("Jump");
-        UpdateAnimation();
+
+        animator.SetBool("estaSaltando", true);
+        //// Lógica de salto aquí
+        //animator.SetTrigger("Jump");
+        //UpdateAnimation();
     }
 
     private void OnDance()
     {
-        // Lógica de baile aquí
-        animator.SetTrigger("Dance");
-        UpdateAnimation();
+        animator.SetBool("estaBailando", true); 
     }
 
-    void UpdateAnimation()
-    {
-        bool isRunning = Mathf.Abs(moveInput.x) > 0.1f;
-        bool isJumping = false; // Agrega la lógica para determinar si el personaje está saltando
-        bool isDancing = false; // Agrega la lógica para determinar si el personaje está bailando
+    //void UpdateAnimation()
+    //{
+    //    bool isRunning = Mathf.Abs(moveInput.x) > 0.1f;
+    //    bool isJumping = false; // Agrega la lógica para determinar si el personaje está saltando
+    //    bool isDancing = false; // Agrega la lógica para determinar si el personaje está bailando
 
-        animator.SetBool("Run", isRunning);
-        animator.SetBool("Jump", isJumping);
-        animator.SetBool("Dance", isDancing);
+    //    animator.SetBool("Run", isRunning);
+    //    animator.SetBool("Jump", isJumping);
+    //    animator.SetBool("Dance", isDancing);
 
-        if (!isRunning && !isJumping && !isDancing)
-        {
-            animator.SetTrigger("Idle");
-        }
-    }
+    //    if (!isRunning && !isJumping && !isDancing)
+    //    {
+    //        animator.SetTrigger("Idle");
+    //    }
+    //}
 
     void Update()
     {

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CharacterAim : MonoBehaviour
 {
-    private float aimSensitivity = 30;
+    private float aimSensitivity = 90;
     //private Vector2 aimSensitivity = new Vector2(30, 20);
     //para tener dos valores diferentes en la sensibilidad vert y horiz
 
