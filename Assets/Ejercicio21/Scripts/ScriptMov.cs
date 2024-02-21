@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class ScriptMov : MonoBehaviour
 {
     public float speedMovement = 5f;
-    public float jumpForce = 5f;
+    public float jumpSpeed = 5f;
     private bool isGrounded = false;
 
     private Rigidbody rb;
@@ -32,15 +32,18 @@ public class ScriptMov : MonoBehaviour
         {
             animator.SetBool("estaCorriendo", false);
         }
-       
     }
 
     private void OnJump()
     {
-        animator.SetBool("estaSaltando", true);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-       
+        if (isGrounded == true)
+        {
+            if (animator != null) animator.SetTrigger("jump");
+            {
+                rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+                animator.SetBool("estaBailando", false);
+            } 
+        }
     }
 
     private void OnDance()
@@ -49,10 +52,14 @@ public class ScriptMov : MonoBehaviour
         {
             animator.SetBool("estaBailando", true);
 
-            //if (("estaSaltando", true) || ("estaCorriendo", true))
-            //{
-            //    ("estaBailando" = false);
-            //}
+        }
+    }
+
+    private void OnStop()
+    {
+        if (isGrounded == true)
+        {
+            animator.SetBool("estaBailando", false);
         }
     }
 
@@ -62,11 +69,12 @@ public class ScriptMov : MonoBehaviour
         newVelocity = transform.rotation * newVelocity;
         rb.velocity = newVelocity;
 
-        if (moveInput.y > 0)
+
+        if (moveInput.x > 0)
         {
             modelTrans.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (moveInput.y < 0)
+        else if (moveInput.x < 0)
         {
             modelTrans.rotation = Quaternion.Euler(0, 180, 0);
         }
@@ -81,12 +89,10 @@ public class ScriptMov : MonoBehaviour
             animator.SetBool("estaCorriendo", false);
         }
 
-
-
-        //else
+        //if (Input.GetKeyDown(KeyCode.E)) 
         //{
-        //    animator.SetBool("estaSaltando", false);
-        //    animator.SetBool("estaBailando", false);
+            
+        //        animator.SetBool("estaBailando", false);
         //}
     }
 
