@@ -5,95 +5,91 @@ using UnityEngine.InputSystem;
 
 public class ScriptMov : MonoBehaviour
 {
-    public float speedMovement = 5f;
-    public float jumpSpeed = 5f;
+    private float movementSpeed = 5;
+    private float jumpForce = 7;
     private bool isGrounded = false;
+    private bool baile = false;
 
     private Rigidbody rb;
     private Animator animator;
-    public Transform modelTrans;
+    public Transform modelTransform;
 
     private Vector2 moveInput;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-    }
-
-    private void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>();
-
-        animator.SetBool("estaCorriendo", true);
-        print(moveInput.x);
-
-        if (moveInput.x == 0)
-        {
-            animator.SetBool("estaCorriendo", false);
-        }
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void OnJump()
     {
         if (isGrounded == true)
         {
-            if (animator != null) animator.SetTrigger("jump");
-            {
-                rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
-                animator.SetBool("estaBailando", false);
-            } 
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         }
+    }
+
+    private void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
     }
 
     private void OnDance()
     {
         if (isGrounded == true)
         {
-            animator.SetBool("estaBailando", true);
-
+            baile = !baile;
         }
     }
 
-    private void OnStop()
-    {
-        if (isGrounded == true)
-        {
-            animator.SetBool("estaBailando", false);
-        }
-    }
 
     void Update()
     {
-        Vector3 newVelocity = new Vector3(0, rb.velocity.y, moveInput.x * speedMovement);
-        newVelocity = transform.rotation * newVelocity;
-        rb.velocity = newVelocity;
+        rb.velocity = new Vector3(0, rb.velocity.y, moveInput.x * movementSpeed);
+
+        if (moveInput.x != 0)
+        {
+            animator.SetBool("estaCorriendo", true);
+            animator.SetBool("estaBailando", false);
+            animator.SetBool("estaSaltando", false);
+        }
+        else 
+        { 
+            animator.SetBool("estaCorriendo", false); 
+        }
 
 
         if (moveInput.x > 0)
         {
-            modelTrans.rotation = Quaternion.Euler(0, 0, 0);
+            modelTransform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (moveInput.x < 0)
         {
-            modelTrans.rotation = Quaternion.Euler(0, 180, 0);
+            modelTransform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
-        if ((moveInput.x != 0) || (moveInput.y != 0))
+
+        if (isGrounded == false)
         {
-            animator.SetBool("estaCorriendo", true);
-            animator.SetBool("estaBailando", false);
+            animator.SetBool("estaSaltando", true);
         }
         else
         {
-            animator.SetBool("estaCorriendo", false);
+            animator.SetBool("estaSaltando", false);
         }
 
-        //if (Input.GetKeyDown(KeyCode.E)) 
-        //{
-            
-        //        animator.SetBool("estaBailando", false);
-        //}
+
+        if (baile == true)
+        {
+            animator.SetBool("estaBailando", true);
+            jumpForce = 0;
+        }
+        else
+        {
+            animator.SetBool("estaBailando", false);
+
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -103,6 +99,11 @@ public class ScriptMov : MonoBehaviour
             isGrounded = true;
         }
     }
-
-
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
+        }
+    }
 }
