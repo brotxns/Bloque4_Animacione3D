@@ -7,8 +7,8 @@ public class CharacMovPruebas : MonoBehaviour
 {
     //esto se pone al empty del personaje. hay que poner en componentes un capsule collider, un rigidbody con las constrains de rotacion y un player input
     public float speedMovement = 5f;
-    private float jumpForce = 7;
-    private bool isGrounded = true;
+    //private float jumpForce = 7;
+    //private bool isGrounded = true;
 
     private Rigidbody rb;
     private Animator animator;
@@ -69,20 +69,20 @@ public class CharacMovPruebas : MonoBehaviour
         //}
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = false;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Ground")
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Ground")
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
    
 
     

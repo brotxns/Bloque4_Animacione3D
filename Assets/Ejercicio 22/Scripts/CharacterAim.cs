@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,14 @@ public class CharacterAim : MonoBehaviour
     private Vector2 aimInput;
 
     private float xAngle;
+
+    public TextMeshProUGUI objetivosText;
+
+    public int objetivo = 0;
+
+    public RaycastCommand hitInfo;
+
+    public GameObject impacto;
 
     void Start()
     {
@@ -43,10 +52,19 @@ public class CharacterAim : MonoBehaviour
         // ray casting es un rayo invisible que sale de donde se apunta (origen) y detecta cuando se dispara y acierta. es un bool. si choca con algo y lo detecta es true. sino es false.
         // se puede utilizar para limitar el alcance de un  arma, ignorar cristales que ven al personaje o al enemigo, detectar si se esta enfrente de la puerta
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.GetChild(0).position, transform.GetChild(0).forward, out hitInfo))
+        if (Physics.Raycast(transform.GetChild(0).position, transform.GetChild(0).forward, out hitInfo, 5))
         {
-            print(hitInfo.collider.name);
+            if (hitInfo.transform.gameObject.CompareTag("Objetivo"))
+            {
+                Instantiate(impacto, hitInfo.transform.position, hitInfo.transform.rotation);
+
+                objetivo++;
+                objetivosText.text = objetivo + " / 5";
+
+                Destroy(hitInfo.transform.gameObject);
+            }
         }
+
         else
         {
             print("No hay nada");
